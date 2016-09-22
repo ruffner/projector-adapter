@@ -1952,26 +1952,40 @@ For attribution, please provide a link in any documentation or design files to t
 <wire x1="-5.7" y1="3.4365" x2="5.7" y2="3.4365" width="0.127" layer="49"/>
 <wire x1="5.7" y1="-2.1665" x2="-5.7" y2="-2.1665" width="0.127" layer="49"/>
 </package>
-<package name="PICOBLADE53261-0271">
-<description>&lt;h1&gt;2-Pin Surface Mount, Right Angle, Male Header&lt;/h1&gt;
-&lt;h2&gt;PicoBlade&amp;trade; 53261 Series, Single Row, 0.049" (1.25mm) Pitch&lt;/h2&gt;
+<package name="PICOBLADE53398-0671">
+<description>&lt;h1&gt;6-Pin Surface Mount, Vertical, Male Header&lt;/h1&gt;
+&lt;h2&gt;PicoBlade&amp;trade; 53398 Series, Single Row, 0.049" (1.25mm) Pitch&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Maximum Current Rating: 1.0A (per channel)&lt;/li&gt;
 &lt;/ul&gt;</description>
-<smd name="MOUNT@1" x="-3.175" y="0" dx="2.1" dy="3" layer="1"/>
-<smd name="MOUNT@2" x="3.175" y="0" dx="2.1" dy="3" layer="1"/>
-<smd name="2" x="-0.65" y="2.9" dx="0.8" dy="1.6" layer="1"/>
-<smd name="1" x="0.6" y="2.9" dx="0.8" dy="1.6" layer="1"/>
-<wire x1="-2" y1="-2.1635" x2="-2" y2="2.0365" width="0.127" layer="21"/>
-<wire x1="-2" y1="2.0365" x2="2" y2="2.0365" width="0.127" layer="21"/>
-<wire x1="2" y1="2.0365" x2="2" y2="-2.1635" width="0.127" layer="21"/>
-<wire x1="2" y1="-2.1635" x2="-2" y2="-2.1635" width="0.127" layer="21"/>
-<text x="-4.685" y="-1.495" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-<text x="5.945" y="-1.595" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
-<rectangle x1="-0.81" y1="2.1" x2="-0.49" y2="2.9" layer="51"/>
-<rectangle x1="0.44" y1="2.1" x2="0.76" y2="2.9" layer="51"/>
-<rectangle x1="2.15" y1="-1.7635" x2="3.85" y2="1.0365" layer="51"/>
-<rectangle x1="-3.85" y1="-1.7635" x2="-2.15" y2="1.0365" layer="51"/>
+<smd name="MOUNT1" x="-5.05" y="0" dx="2.1" dy="3" layer="1"/>
+<smd name="MOUNT2" x="6.3" y="0" dx="2.1" dy="3" layer="1" rot="R180"/>
+<smd name="1" x="-2.5" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<smd name="2" x="-1.25" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<smd name="3" x="0" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<smd name="4" x="1.25" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<smd name="5" x="2.5" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<smd name="6" x="3.75" y="2.75" dx="0.8" dy="1.3" layer="1"/>
+<wire x1="-5.7" y1="-1.125" x2="6.95" y2="-1.125" width="0.127" layer="49"/>
+<wire x1="-5.7" y1="-1.125" x2="-5.7" y2="3.075" width="0.127" layer="49"/>
+<wire x1="6.95" y1="-1.125" x2="6.95" y2="3.075" width="0.127" layer="49"/>
+<wire x1="-5.7" y1="3.075" x2="6.95" y2="3.075" width="0.127" layer="49"/>
+<rectangle x1="-2.66" y1="-0.2" x2="-2.34" y2="0.2" layer="21"/>
+<rectangle x1="-1.41" y1="-0.2" x2="-1.09" y2="0.2" layer="21"/>
+<rectangle x1="-0.16" y1="-0.2" x2="0.16" y2="0.2" layer="21"/>
+<rectangle x1="1.09" y1="-0.2" x2="1.41" y2="0.2" layer="21"/>
+<rectangle x1="2.34" y1="-0.2" x2="2.66" y2="0.2" layer="21"/>
+<rectangle x1="3.59" y1="-0.2" x2="3.91" y2="0.2" layer="21"/>
+<rectangle x1="-2.66" y1="2.575" x2="-2.34" y2="3.175" layer="51"/>
+<rectangle x1="-1.41" y1="2.575" x2="-1.09" y2="3.175" layer="51"/>
+<rectangle x1="-0.16" y1="2.575" x2="0.16" y2="3.175" layer="51"/>
+<rectangle x1="1.09" y1="2.575" x2="1.41" y2="3.175" layer="51"/>
+<rectangle x1="2.34" y1="2.575" x2="2.66" y2="3.175" layer="51"/>
+<rectangle x1="3.59" y1="2.575" x2="3.91" y2="3.175" layer="51"/>
+<rectangle x1="-5.7" y1="-1.125" x2="-4.22" y2="1.075" layer="51"/>
+<rectangle x1="5.47" y1="-1.075" x2="6.95" y2="1.125" layer="51" rot="R180"/>
+<text x="-6.25" y="-1.25" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="8.75" y="-1.25" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -2044,54 +2058,62 @@ For attribution, please provide a link in any documentation or design files to t
 </device>
 </devices>
 </deviceset>
-<deviceset name="0532610271" prefix="J">
-<description>&lt;h1&gt;1.25mm Pitch PicoBlade™ Header, Surface Mount, Right Angle, 2 Circuits&lt;/h1&gt;
+<deviceset name="05339805711" prefix="J">
+<description>&lt;h1&gt;1.25mm Pitch PicoBlade™ Header, Surface Mount, Vertical, 6 Circuits&lt;/h1&gt;
 &lt;h2&gt;PicoBlade™ Connector System&lt;/h2&gt;
 &lt;h3&gt;Documentation&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www.molex.com/pdm_docs/sd/532610271_sd.pdf"&gt;Drawing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.molex.com/pdm_docs/sd/533980571_sd.pdf"&gt;Drawing&lt;/a&gt;
 &lt;/ul&gt;</description>
 <gates>
-<gate name="-1" symbol="MALE_CONNECTOR" x="0" y="5.08"/>
-<gate name="-2" symbol="MALE_CONNECTOR" x="0" y="-5.08"/>
+<gate name="-1" symbol="MALE_CONNECTOR" x="0" y="20.32"/>
+<gate name="-2" symbol="MALE_CONNECTOR" x="0" y="10.16"/>
+<gate name="-3" symbol="MALE_CONNECTOR" x="0" y="0"/>
+<gate name="-4" symbol="MALE_CONNECTOR" x="0" y="-10.16"/>
+<gate name="-5" symbol="MALE_CONNECTOR" x="0" y="-20.32"/>
+<gate name="-6" symbol="MALE_CONNECTOR" x="0" y="-30.48"/>
 </gates>
 <devices>
-<device name="" package="PICOBLADE53261-0271">
+<device name="" package="PICOBLADE53398-0671">
 <connects>
 <connect gate="-1" pin="P$1" pad="1"/>
 <connect gate="-2" pin="P$1" pad="2"/>
+<connect gate="-3" pin="P$1" pad="3"/>
+<connect gate="-4" pin="P$1" pad="4"/>
+<connect gate="-5" pin="P$1" pad="5"/>
+<connect gate="-6" pin="P$1" pad="6"/>
 </connects>
 <technologies>
 <technology name="">
-<attribute name="CATEGORY" value="Conectors, Interconnects"/>
-<attribute name="COLOR" value="Natural"/>
-<attribute name="CONNECTOR_TYPE" value="Header, Shrouded"/>
-<attribute name="CONTACT_FINISH" value="Tin"/>
-<attribute name="CONTACT_FINISH_THICKNESS" value="39µin (1.00µm)"/>
-<attribute name="CONTACT_MATING_LENGTH" value="-"/>
-<attribute name="CONTACT_TYPE" value="Blade Pin"/>
-<attribute name="DESCRIPTION" value="CONN HEADER 2POS 1.25MM R/A SMD"/>
-<attribute name="DOCUMENTATION_LINK" value="&lt;a href=&quot;http://www.molex.com/pdm_docs/sd/532610271_sd.pdf&quot;&gt;Datasheet&lt;/a&gt;"/>
-<attribute name="DOCUMENTATION_URL" value="http://www.molex.com/pdm_docs/sd/532610271_sd.pdf"/>
-<attribute name="FAMILY" value="Rectangular Connectors - Headers, Male Pins"/>
-<attribute name="FASTENING_TYPE" value="-"/>
-<attribute name="FEATURES" value="Solder Retention"/>
-<attribute name="MANUFACTURER" value="Molex Inc"/>
-<attribute name="MOUNTING_TYPE" value="Surface Mount, Right Angle"/>
-<attribute name="NUMBER_OF_POSITIONS" value="2"/>
-<attribute name="NUMBER_OF_POSITIONS_LOADED" value="All"/>
-<attribute name="NUMBER_OF_ROWS" value="1"/>
-<attribute name="PART_NUMBER" value="0532610271"/>
-<attribute name="PITCH" value="0.049&quot; (1.25mm)"/>
-<attribute name="ROW_SPACING" value="-"/>
-<attribute name="SERIES" value="PicoBlade™ 53261"/>
-<attribute name="SUPPLIER_ITEM_LINK" value="&lt;a href=&quot;http://www.digikey.com/product-detail/en/0532610271/WM7620CT-ND/699107&quot;&gt;Details&lt;/a&gt;"/>
-<attribute name="SUPPLIER_ITEM_NUMBER" value="WM7620CT-ND"/>
-<attribute name="SUPPLIER_ITEM_URL" value="http://www.digikey.com/product-detail/en/0532610271/WM7620CT-ND/699107"/>
-<attribute name="SUPPLIER_LINK" value="&lt;a href=&quot;http://www.digikey.com&quot;&gt;Home Page&lt;/a&gt;"/>
-<attribute name="SUPPLIER_NAME" value="Digi-Key"/>
-<attribute name="SUPPLIER_URL" value="http://www.digikey.com"/>
-<attribute name="TERMINATION" value="Solder"/>
+<attribute name="CATEGORY" value="Connectors, Interconnects" constant="no"/>
+<attribute name="COLOR" value="Natural" constant="no"/>
+<attribute name="CONNECTOR_TYPE" value="Header, Shrouded" constant="no"/>
+<attribute name="CONTACT_FINISH" value="Tin" constant="no"/>
+<attribute name="CONTACT_FINISH_THICKNESS" value="39µin (1.00µm)" constant="no"/>
+<attribute name="CONTACT_MATING_LENGTH" value="-" constant="no"/>
+<attribute name="CONTACT_TYPE" value="Blade Pin" constant="no"/>
+<attribute name="DESCRIPTION" value="CONN HEADER 6POS 1.25MM VERT SMD" constant="no"/>
+<attribute name="DOCUMENTATION_LINK" value="&lt;a href=&quot;http://www.molex.com/pdm_docs/sd/533980571_sd.pdf&quot;&gt;Drawing&lt;/a&gt;" constant="no"/>
+<attribute name="DOCUMENTATION_URL" value="http://www.molex.com/pdm_docs/sd/533980571_sd.pdf" constant="no"/>
+<attribute name="FAMILY" value="  Rectangular Connectors - Headers, Male Pins " constant="no"/>
+<attribute name="FASTENING_TYPE" value="-" constant="no"/>
+<attribute name="FEATURES" value="Solder Retention" constant="no"/>
+<attribute name="MANUFACTURER" value="Molex Inc" constant="no"/>
+<attribute name="MOUNTING_TYPE" value="Surface Mount" constant="no"/>
+<attribute name="NUMBER_OF_POSITIONS" value="5" constant="no"/>
+<attribute name="NUMBER_OF_POSITIONS_LOADED" value="All" constant="no"/>
+<attribute name="NUMBER_OF_ROWS" value="1" constant="no"/>
+<attribute name="PART_NUMBER" value="05339805711" constant="no"/>
+<attribute name="PITCH" value="0.049&quot; (1.25mm)" constant="no"/>
+<attribute name="ROW_SPACING" value="-" constant="no"/>
+<attribute name="SERIES" value="PicoBlade™ 53398" constant="no"/>
+<attribute name="SUPPLIER_ITEM_LINK" value="&lt;a href=&quot;http://www.digikey.com/product-detail/en/0533980571/WM7609CT-ND/699083&quot;&gt;Details&lt;/a&gt;" constant="no"/>
+<attribute name="SUPPLIER_ITEM_NUMBER" value="WM7609CT-ND" constant="no"/>
+<attribute name="SUPPLIER_ITEM_URL" value="http://www.digikey.com/product-detail/en/0533980571/WM7609CT-ND/699083" constant="no"/>
+<attribute name="SUPPLIER_LINK" value="&lt;a href=&quot;http://www.digikey.com&quot;&gt;Home Page&lt;/a&gt;" constant="no"/>
+<attribute name="SUPPLIER_NAME" value="Digi-key" constant="no"/>
+<attribute name="SUPPLIER_URL" value="http://www.digikey.com" constant="no"/>
+<attribute name="TERMINATION" value="Solder" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -2117,8 +2139,8 @@ For attribution, please provide a link in any documentation or design files to t
 <part name="R3" library="SparkFun-Passives" deviceset="RESISTOR" device="0603-RES" value="1K"/>
 <part name="GND3" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="J3" library="volks73-Molex" deviceset="0532610471" device=""/>
-<part name="J1" library="volks73-Molex" deviceset="0532610271" device=""/>
-<part name="J4" library="volks73-Molex" deviceset="0532610271" device=""/>
+<part name="J1" library="volks73-Molex" deviceset="05339805711" device=""/>
+<part name="J2" library="volks73-Molex" deviceset="05339805711" device=""/>
 <part name="GND1" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 <part name="GND4" library="SparkFun-Aesthetics" deviceset="GND" device=""/>
 </parts>
@@ -2138,12 +2160,20 @@ For attribution, please provide a link in any documentation or design files to t
 <instance part="J3" gate="-2" x="93.98" y="-17.78"/>
 <instance part="J3" gate="-3" x="93.98" y="-27.94"/>
 <instance part="J3" gate="-4" x="93.98" y="-38.1"/>
-<instance part="J1" gate="-1" x="127" y="25.4"/>
-<instance part="J1" gate="-2" x="127" y="30.48"/>
-<instance part="J4" gate="-1" x="-15.24" y="33.02" rot="R180"/>
-<instance part="J4" gate="-2" x="-15.24" y="25.4" rot="R180"/>
-<instance part="GND1" gate="1" x="-7.62" y="7.62"/>
-<instance part="GND4" gate="1" x="114.3" y="5.08"/>
+<instance part="J1" gate="-1" x="139.7" y="40.64"/>
+<instance part="J1" gate="-2" x="139.7" y="27.94"/>
+<instance part="J1" gate="-3" x="139.7" y="17.78"/>
+<instance part="J1" gate="-4" x="139.7" y="7.62"/>
+<instance part="J1" gate="-5" x="142.24" y="-7.62"/>
+<instance part="J1" gate="-6" x="139.7" y="-20.32"/>
+<instance part="J2" gate="-1" x="-30.48" y="58.42" rot="R180"/>
+<instance part="J2" gate="-2" x="-30.48" y="45.72" rot="R180"/>
+<instance part="J2" gate="-3" x="-30.48" y="33.02" rot="R180"/>
+<instance part="J2" gate="-4" x="-30.48" y="25.4" rot="R180"/>
+<instance part="J2" gate="-5" x="-30.48" y="15.24" rot="R180"/>
+<instance part="J2" gate="-6" x="-30.48" y="-5.08" rot="R180"/>
+<instance part="GND1" gate="1" x="0" y="20.32"/>
+<instance part="GND4" gate="1" x="111.76" y="10.16"/>
 </instances>
 <busses>
 </busses>
@@ -2172,16 +2202,17 @@ For attribution, please provide a link in any documentation or design files to t
 <pinref part="GND3" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="J4" gate="-2" pin="P$1"/>
-<wire x1="-10.16" y1="25.4" x2="-7.62" y2="25.4" width="0.1524" layer="91"/>
-<wire x1="-7.62" y1="25.4" x2="-7.62" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="J2" gate="-3" pin="P$1"/>
+<wire x1="-25.4" y1="33.02" x2="-2.54" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
+<wire x1="-2.54" y1="33.02" x2="0" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="0" y1="33.02" x2="0" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="114.3" y1="25.4" x2="114.3" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="J1" gate="-3" pin="P$1"/>
+<wire x1="134.62" y1="17.78" x2="111.76" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="17.78" x2="111.76" y2="12.7" width="0.1524" layer="91"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<pinref part="J1" gate="-1" pin="P$1"/>
-<wire x1="121.92" y1="25.4" x2="114.3" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="TO_PROJ" class="0">
@@ -2198,14 +2229,14 @@ For attribution, please provide a link in any documentation or design files to t
 </net>
 <net name="FROM_PROJ" class="0">
 <segment>
-<pinref part="J4" gate="-1" pin="P$1"/>
-<wire x1="-10.16" y1="33.02" x2="-2.54" y2="33.02" width="0.1524" layer="91"/>
-<label x="0" y="33.02" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="TEENSY_LEFT" gate="G$1" pin="4"/>
 <wire x1="40.64" y1="45.72" x2="30.48" y2="45.72" width="0.1524" layer="91"/>
 <label x="22.86" y="45.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J2" gate="-2" pin="P$1"/>
+<wire x1="-25.4" y1="45.72" x2="0" y2="45.72" width="0.1524" layer="91"/>
+<label x="-5.08" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TO_CAMERA" class="0">
@@ -2245,11 +2276,13 @@ For attribution, please provide a link in any documentation or design files to t
 <junction x="66.04" y="2.54"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="N$4" class="0">
 <segment>
-<pinref part="R1" gate="G$1" pin="2"/>
 <pinref part="J1" gate="-2" pin="P$1"/>
+<wire x1="121.92" y1="27.94" x2="134.62" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="114.3" y1="30.48" x2="121.92" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="27.94" x2="121.92" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

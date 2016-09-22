@@ -2,9 +2,9 @@
 // and projector
 // Matt Ruffner 2016
 
-#define TO_PROJ   0
-#define FROM_PROJ 1
-#define TO_CAMERA 2
+#define TO_PROJ   1
+#define FROM_PROJ 2
+#define TO_CAMERA 0
 
 void setup() {
   // put your setup code here, to run once:
