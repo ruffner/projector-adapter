@@ -9,7 +9,7 @@ A custom made PCB was made with the same footprint as the Teensy3.2 with molex c
 
 The PCB sits below the Teensy, with the 6 pin connectors to and from the projector and the 4 pin header routed to the camera trigger cable.
 
-<img src="./images/v3pcb.jpg" width="505" height="505">
+<img src="./images/v3pcb.jpg" width="300" height="300">
 
 It is written to interface with Ximea cameras using [this](https://www.ximea.com/support/wiki/apis/XiAPI_Camera_Trigger_and_Synchronization_Signals) protocall.
 
