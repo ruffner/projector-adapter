@@ -9,11 +9,11 @@ A custom made PCB was made with the same footprint as the Teensy3.2 with molex c
 
 The PCB sits below the Teensy, with the 6 pin connectors to and from the projector and the 4 pin header routed to the camera trigger cable.
 
-![Custom PCB Shield](http://github.com/ruffner/projector-adapter/raw/master/images/v3pcb.jpg "Custom PCB Shield")
+<img src="./images/v3pcb.jpg" width="505" height="505">
 
 It is written to interface with Ximea cameras using [this](https://www.ximea.com/support/wiki/apis/XiAPI_Camera_Trigger_and_Synchronization_Signals) protocall.
 
-Here is a scope trace of the signals involved: ![Scope Trace](http://github.com/ruffner/projector-adapter/raw/master/images/scope-trace.jpg "Scope Trace")
+Here is a scope trace of the signals involved: <img src="./images/scope-trace.jpg" width="595" height="645">
 
 ### Firmware and operation
 
