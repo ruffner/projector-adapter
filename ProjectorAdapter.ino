@@ -1,4 +1,4 @@
-// Trigger interface between camera 
+// Trigger interface between camera
 // and projector
 // Matt Ruffner 2016
 
@@ -15,11 +15,10 @@
 
 #define TIMEOUT 5000
 
-#define STATUS    '?'
-#define CONFIG    'c'
-#define RELOAD    'r'
-#define SAVE      's'
-#define START     't'
+#define COMMAND_STATUS    '?'
+#define COMMAND_CONFIG    'c'
+#define COMMAND_RELOAD    'r'
+#define COMMAND_SAVE      's'
 
 // not including newline
 #define PACKET_SIZE 12
@@ -29,7 +28,7 @@
 #define ADDR_EXP_TIME   4
 #define ADDR_DUTY_CYCLE 8
 
-unsigned long t_off = 900;  // in ms 
+unsigned long t_off = 900;  // in ms
 unsigned long t_on  = 100;
 unsigned long t_exp  = 16;
 
@@ -49,90 +48,58 @@ void setup() {
   // update settings from EEPROM
   readConfigVals();
 
-  // cofig timeout on boot
-  unsigned long n = millis();
-  while( !Serial.available() && millis() - n < TIMEOUT );
-
-  // didn't timeout
-  if( Serial.available() ){
-    String cd = "";
-    char c = STATUS;
-
-    // allows for multiple configs
-    while ( c != START ){
-      c = Serial.read();
-      
-      switch( c ){
-        case STATUS:
-          // to populate software fields
-          if( sendConfig() )
-            blinkOK();
-          else
-            blinkError();
-          break;
-          
-        case CONFIG:
-          // incoming config vals after command byte
-          while( Serial.available() < PACKET_SIZE );
-          if( parseConfig() )
-            blinkOK();
-          else 
-            blinkError();  
-          break;
-          
-        case RELOAD:
-          // config stored in EEPROM
-          // reset to prior config feature
-          readConfigVals();
-          blinkOK();
-          break;
-          
-        case SAVE:
-          // save current parameters to EEPROM
-          saveConfigVals();
-          blinkOK();
-          break;
-        default:
-          blinkError();
-      }
-      
-      // flush newline
-      Serial.read();
-    }
-    
-  }
+  // setup usb
+  //usb_init();
 
   t_on = 100;
   t_off = 900;
   t_exp = 16;
 
+  settings.expRate = 1;
+  settings.expTime = 16;
+  settings.dutyCycle = 10;
+
+
+  Serial.println("Finished Setup");
   blinkOK();
 }
 
 void loop() {
-  
+
+
+  if ( Serial.available() ) handleSerial();
+
+  unsigned long now = millis();
+
   digitalWrite( TO_PROJ, HIGH );
-  delay(t_on);
+
+  while ( !Serial.available() && millis() - now < t_on);
+  if (Serial.available()) handleSerial();
+
   digitalWrite( TO_PROJ, LOW );
   // projector sends back trigger pulses
   // after falling edge
 
   // timestamp to avoid time out if projector
   // never responds
-  unsigned long now = millis();
+
 
   // wait until the projector sends the first
   // of the trigger pulses
-  while( !digitalRead( FROM_PROJ ) && millis()-now < t_off );
+  //while( !digitalRead( FROM_PROJ ) && millis()-now < t_off );
+
+  now = millis();
+  while ( !Serial.available() && millis() - now < t_on && !digitalRead( FROM_PROJ ));
+  if (Serial.available()) handleSerial();
 
   // trigger pulse is wide enough we don't
   // have to worry about it falling before we check here
-  if( digitalRead( FROM_PROJ ) ){
+  if ( digitalRead( FROM_PROJ ) ) {
 
     // wait till we go low
-    while( digitalRead( FROM_PROJ ) );
-    delayMicroseconds(t_exp-1);
-      
+    while ( digitalRead( FROM_PROJ ) );
+    delayMicroseconds(t_exp - 1);
+
     // pass the pulse on to the camera
     // status blink too
     digitalWrite( TO_CAMERA, HIGH );
@@ -143,58 +110,62 @@ void loop() {
 
     // idle and ignore the rest of the pulses
     // from the projector
-    while( millis()-now < t_off );
+    //while( millis()-now < t_off );
   }
-  
+  while ( millis() - now < t_off );
+}
+
+void handleSerial() {
+  unsigned long now = millis();
+  char c = COMMAND_STATUS;
+
+  c = Serial.read();
+
+  switch ( c ) {
+    case COMMAND_STATUS:
+      // to populate software fields
+      sendConfig();
+      blinkOK();
+      break;
+
+    case COMMAND_CONFIG:
+      parseConfig();
+      blinkOK();
+      break;
+
+    case COMMAND_RELOAD:
+      // config stored in EEPROM
+      // reset to prior config feature
+      readConfigVals();
+      blinkOK();
+      break;
+
+    case COMMAND_SAVE:
+      // save current parameters to EEPROM
+      saveConfigVals();
+      blinkOK();
+      break;
+    default:
+      blinkError();
+  }
+
+  // flush newline
+  if( Serial.peek() == '\n' )
+    Serial.read();
 }
 
 bool parseConfig() {
-  uint16_t cka, ckb, ckck;
-
-  settings.expRate = readLongFromSerial();
-  settings.expTime = readLongFromSerial();
-  settings.dutyCycle = readLongFromSerial();
-
-  cka = Serial.read();
-  ckb = Serial.read();
-
-  ckck = checksum();
-
-  if( ckck == ((cka << 8) | ckb) )
-    return true;
-  else
-    return false;
+  settings.expRate = (unsigned long)Serial.parseInt();
+  settings.expTime = (unsigned long)Serial.parseInt();
+  settings.dutyCycle = (unsigned long)Serial.parseInt();
 }
 
 bool sendConfig() {
-  uint16_t ckck = checksum();
+  String buf = String(ID_STRING) + " " + settings.expRate + String(" ") + settings.expTime + String(" ") + settings.dutyCycle;
 
-  String buf = ID_STRING;
+  Serial.println(buf);
 
-  uint8_t *p = (uint8_t *)settings.expRate;
-  for( int i=0; i<ID_LEN; i++,p++ )
-    buf[i] = *p;
-
-  for( int i=0; i<4; i++ )
-    buf[ID_LEN+i] = (unsigned char)(settings.expTime >> 8*i);
-  
-
-  
-  buf[ID_LEN+PACKET_SIZE] = (uint8_t)(ckck >> 8);
-  buf[ID_LEN+PACKET_SIZE+1] =  (uint8_t)(ckck);
-  
   return true;
-}
-
-uint16_t checksum(){
-  uint8_t *p = (uint8_t *)settings.expRate, cka, ckb;
-  
-  for( int i=0; i<PACKET_SIZE; i++,p++ ){
-    cka += *p;
-    ckb += cka;
-  }
-
-  return (uint16_t) ((cka << 8) | ckb);
 }
 
 void readConfigVals() {
@@ -211,23 +182,23 @@ void saveConfigVals() {
 
 unsigned long readLongFromSerial() {
   return (Serial.read() << 24 |
-          Serial.read() << 16 | 
-          Serial.read() << 8 | 
+          Serial.read() << 16 |
+          Serial.read() << 8 |
           Serial.read());
 }
 
 unsigned long readLongFromEEPROM(uint8_t a) {
-  return( EEPROM.read(a) << 24 | 
-          EEPROM.read(a+1) << 16 |
-          EEPROM.read(a+2) << 8 |
-          EEPROM.read(a+3) );
+  return ( EEPROM.read(a) << 24 |
+           EEPROM.read(a + 1) << 16 |
+           EEPROM.read(a + 2) << 8 |
+           EEPROM.read(a + 3) );
 }
 
 void writeLongToEEPROM(uint8_t a, unsigned long d) {
   EEPROM.write(a, (uint8_t)(d >> 24));
-  EEPROM.write(a, (uint8_t)(d >> 16));
-  EEPROM.write(a, (uint8_t)(d >> 8));
-  EEPROM.write(a, (uint8_t)(d));
+  EEPROM.write(a + 1, (uint8_t)(d >> 16));
+  EEPROM.write(a + 2, (uint8_t)(d >> 8));
+  EEPROM.write(a + 3, (uint8_t)(d));
 }
 
 void setupPins() {
@@ -252,7 +223,7 @@ void blinkOK() {
 }
 
 void blinkError() {
-  for( int i=0; i<5; i++ ){
+  for ( int i = 0; i < 5; i++ ) {
     digitalWrite(LED, HIGH);
     delay(150);
     digitalWrite(LED, LOW);
