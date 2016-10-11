@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
     app.setOrganizationName(QString("Matt Ruffner 2016"));
     app.setOrganizationDomain(QString("github.com/ruffner"));
     app.setApplicationName(QString("Exposure Configuration"));
-    QCoreApplication a(argc, argv);
 
     MPRExposureDialog w;
     return w.exec();

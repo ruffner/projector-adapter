@@ -19,6 +19,25 @@
 #include <QApplication>
 #include <QDialogButtonBox>
 
+#define EXP_RATE_LABEL "Exposure Frequency"
+#define EXP_TIME_LABEL "Exposure Length"
+#define DUTY_CYCLE_LABEL "Trigger Duty Cycle"
+
+#define STRING_NO_CONNECTION "Device not connected"
+#define STRING_IS_CONNECTION "Device found!"
+
+#define EXP_RATE_MIN 1      // milliseconds, .001 s
+#define EXP_RATE_MAX 1000   // milliseconds, 1 s
+#define EXP_RATE_DEF 1
+
+#define EXP_TIME_MIN 1      // ms
+#define EXP_TIME_MAX 100    // ms
+#define EXP_TIME_DEF 16     // ms
+
+#define DUTY_CYCLE_MIN 1
+#define DUTY_CYCLE_MAX 100
+#define DUTY_CYCLE_DEF 10
+
 class MPRExposureWidget : public QWidget
 {
     Q_OBJECT
@@ -27,7 +46,10 @@ public:
     ~MPRExposureWidget();
 
 private:
-    QSpinBox *serialSpingBox,*expRateSpinBox, *dutyCycleSpinBox, *expTimeSpinBox;
+    QSlider *expRateSlider, *dutyCycleSlider, *expTimeSlider;
+    QSpinBox *expRateSpinBox, *dutyCycleSpinBox, *expTimeSpinBox;
+    QLabel *connectionLabel;
+    QPushButton *findDeviceButton;
 };
 
 
@@ -36,18 +58,12 @@ class MPRExposureDialog : public QDialog
     Q_OBJECT
 public:
     MPRExposureDialog(QDialog *parent = 0) : QDialog(parent){
-        this->setLayout(new QVboxLayout());
+        this->setLayout(new QVBoxLayout());
         this->layout()->setContentsMargins(10,10,10,10);
-        this->setMaximunWidth(500);
 
         exposureWidget = new MPRExposureWidget();
         this->layout()->addWidget(exposureWidget);
-        ((QVBoxLauout*)(this->layout()))->addSpacing(20);
-
-        QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-        this->layout()->addWidget(buttonBox);
-        connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(accept()));
-        connect(buttonBox->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(reject()));
+        ((QVBoxLayout*)(this->layout()))->addSpacing(20);
     }
 
 protected:
