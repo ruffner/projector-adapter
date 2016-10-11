@@ -8,15 +8,16 @@
 #include <QSlider>
 #include <QWidget>
 #include <QString>
-#include <QThread>
 #include <QDialog>
 #include <QSpinBox>
 #include <QSettings>
 #include <QGroupBox>
+#include <QComboBox>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QApplication>
+#include <QSerialPortInfo>
 #include <QDialogButtonBox>
 
 #define EXP_RATE_LABEL "Exposure Frequency"
@@ -45,11 +46,22 @@ public:
     MPRExposureWidget(QWidget *parent = 0);
     ~MPRExposureWidget();
 
+public slots:
+    void onConnectTry();
+
 private:
+    QGroupBox *controlsGroupBox;
+    QComboBox *serialComboBox;
     QSlider *expRateSlider, *dutyCycleSlider, *expTimeSlider;
     QSpinBox *expRateSpinBox, *dutyCycleSpinBox, *expTimeSpinBox;
     QLabel *connectionLabel;
-    QPushButton *findDeviceButton;
+    QPushButton *connectButton;
+
+    bool isConnected;
+
+private slots:
+    void onConnectOK();
+    void onConnectFail();
 };
 
 

@@ -1,4 +1,4 @@
-QT += core gui widgets
+QT += core gui widgets serialport
 TEMPLATE = app
 TARGET = MPRExposureConfiguration
 
@@ -9,4 +9,3 @@ SOURCES += main.cpp\
 
 HEADERS += mprexposuredialog.h
 
-LIBS += -L/usr/local/lib -lusb-1.0

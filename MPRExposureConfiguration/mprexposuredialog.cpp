@@ -2,27 +2,35 @@
 
 MPRExposureWidget::MPRExposureWidget(QWidget *parent) : QWidget(parent)
 {
-    this->setMinimumHeight(300);
+    this->setMinimumHeight(100);
     this->setMinimumWidth(400);
 
     this->setLayout(new QVBoxLayout());
     this->layout()->setContentsMargins(0,0,0,0);
 
-    /////////////////////////////
+
     // DEVICE CONNECTION GROUPING
     QGroupBox *connectionGroupBox = new QGroupBox(QString("Connection"));
     connectionGroupBox->setLayout(new QHBoxLayout());
     connectionGroupBox->layout()->setContentsMargins(6,6,6,6);
-    findDeviceButton = new QPushButton("Find Device", this);
+    serialComboBox = new QComboBox(this);
+    // ADD ALL SERIAL PORTS
+    Q_FOREACH(QSerialPortInfo port, QSerialPortInfo::availablePorts()) {
+        serialComboBox->addItem(port.portName());
+    }
+    connectButton = new QPushButton("Connect", this);
     connectionLabel = new QLabel(QString(STRING_NO_CONNECTION));
     connectionGroupBox->layout()->addWidget(connectionLabel);
-    connectionGroupBox->layout()->addWidget(findDeviceButton);
+    connectionGroupBox->layout()->addWidget(serialComboBox);
+    connectionGroupBox->layout()->addWidget(connectButton);
     this->layout()->addWidget(connectionGroupBox);
 
-    ///////////////////////////
+
     // DEVICE CONTROLS GROUPING
-    QGroupBox *controlsGroupBox = new QGroupBox(QString("Controls"));
+    controlsGroupBox = new QGroupBox(QString("Controls"));
     controlsGroupBox->setLayout(new QVBoxLayout());
+    controlsGroupBox->setVisible(false);
+
 
     // EXPOSURE FREQUENCY
     QGroupBox *fGroupBox = new QGroupBox(QString(EXP_RATE_LABEL));
@@ -39,6 +47,7 @@ MPRExposureWidget::MPRExposureWidget(QWidget *parent) : QWidget(parent)
     fGroupBox->layout()->addWidget(expRateSpinBox);
     controlsGroupBox->layout()->addWidget(fGroupBox);
 
+
     // EXPOSURE TIME
     QGroupBox *tGroupBox = new QGroupBox(QString(EXP_TIME_LABEL));
     tGroupBox->setLayout(new QHBoxLayout());
@@ -53,6 +62,7 @@ MPRExposureWidget::MPRExposureWidget(QWidget *parent) : QWidget(parent)
     tGroupBox->layout()->addWidget(expTimeSlider);
     tGroupBox->layout()->addWidget(expTimeSpinBox);
     controlsGroupBox->layout()->addWidget(tGroupBox);
+
 
     // DUTY CYCLE VARIATION
     QGroupBox *dGroupBox = new QGroupBox(QString(DUTY_CYCLE_LABEL));
@@ -71,10 +81,31 @@ MPRExposureWidget::MPRExposureWidget(QWidget *parent) : QWidget(parent)
 
     this->layout()->addWidget(controlsGroupBox);
 
-
+    connect(connectButton, SIGNAL(clicked(bool)), this, SLOT(onConnectTry()));
 }
 
 MPRExposureWidget::~MPRExposureWidget()
 {
 
+}
+
+void MPRExposureWidget::onConnectTry()
+{
+    qDebug() << "opening serial port";
+    controlsGroupBox->setVisible(true);
+    this->setMinimumHeight(400);
+}
+
+void MPRExposureWidget::onConnectOK()
+{
+    qDebug() << "connection successful";
+
+    connectionLabel->setText(QString(STRING_IS_CONNECTION));
+}
+
+void MPRExposureWidget::onConnectFail()
+{
+    qDebug() << "connection failed";
+
+    connectionLabel->setText(QString(STRING_NO_CONNECTION));
 }
