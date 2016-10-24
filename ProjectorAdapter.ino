@@ -24,16 +24,16 @@
 #define PACKET_SIZE 12
 
 // setting value addresses in EEPROM
-#define ADDR_EXP_RATE   0
-#define ADDR_EXP_TIME   4
-#define ADDR_DUTY_CYCLE 8
+#define ADDR_EXP_RATE   12
+#define ADDR_EXP_TIME   16
+#define ADDR_DUTY_CYCLE 20
 
 unsigned long t_off = 900;  // in ms
 unsigned long t_on  = 100;
 unsigned long t_exp  = 16;
 
 
-typedef struct BUFFER {
+struct BUFFER {
   unsigned long expRate, expTime, dutyCycle;
 };
 
@@ -48,25 +48,14 @@ void setup() {
   // update settings from EEPROM
   readConfigVals();
 
-  // setup usb
-  //usb_init();
-
-  t_on = 100;
-  t_off = 900;
-  t_exp = 16;
-
-  settings.expRate = 1;
-  settings.expTime = 16;
-  settings.dutyCycle = 10;
-
+  generateTimingValues();
 
   Serial.println("Finished Setup");
   blinkOK();
 }
 
 void loop() {
-
-
+  
   if ( Serial.available() ) handleSerial();
 
   unsigned long now = millis();
@@ -116,7 +105,6 @@ void loop() {
 }
 
 void handleSerial() {
-  unsigned long now = millis();
   char c = COMMAND_STATUS;
 
   c = Serial.read();
@@ -129,8 +117,10 @@ void handleSerial() {
       break;
 
     case COMMAND_CONFIG:
-      parseConfig();
-      blinkOK();
+      if( !parseConfig() )
+        blinkError();
+      else
+        blinkOK();
       break;
 
     case COMMAND_RELOAD:
@@ -149,15 +139,33 @@ void handleSerial() {
       blinkError();
   }
 
+  generateTimingValues();
+
   // flush newline
   if( Serial.peek() == '\n' )
     Serial.read();
+}
+
+void generateTimingValues() {
+  double t_on_frac = ((double)settings.dutyCycle)/((double)100.0);
+  double t_off_frac = 1.0 - t_on_frac;
+  
+  t_on = (unsigned long)((double)settings.expRate*t_on_frac);
+  t_off = (unsigned long)((double)settings.expRate*t_off_frac);
+  t_exp = settings.expTime;
 }
 
 bool parseConfig() {
   settings.expRate = (unsigned long)Serial.parseInt();
   settings.expTime = (unsigned long)Serial.parseInt();
   settings.dutyCycle = (unsigned long)Serial.parseInt();
+
+  if( settings.expRate != 0 && settings.expTime != 0 && settings.dutyCycle != 0 ){
+    saveConfigVals();
+    return true;      
+  } else {
+    return false;
+  }
 }
 
 bool sendConfig() {
