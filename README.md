@@ -13,7 +13,7 @@ The PCB sits below the Teensy, with the 6 pin connectors to and from the project
 
 It is written to interface with Ximea cameras using [this](https://www.ximea.com/support/wiki/apis/XiAPI_Camera_Trigger_and_Synchronization_Signals) protocall.
 
-Here is a scope trace of the signals involved: <img src="./images/scope-trace.jpg" width="595" height="645">
+Here is a scope trace of the signals involved: <img src="./images/scope-trace.png">
 
 ### Firmware and operation
 
