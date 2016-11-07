@@ -17,6 +17,6 @@ Here is a scope trace of the signals involved: <img src="./images/scope-trace.pn
 
 ### Firmware and operation
 
-The green trace is the trigger output from the Teensy3.2, at 1Hz with a 20% duty cycle. This signal is routed to the projector. Once the projector has been triggered it sends out trigger pulses (blue), intended to trigger the camera. However, it sends pulses until the next rising edge of its 20% duty cycle trigger signal. This would result in the camera exposing more times than desired.
+The pink trace is the trigger output from the Teensy3.2, at 1Hz with a 10% duty cycle. This signal is routed to the projector. Once the projector has been triggered it sends out trigger pulses (blue), intended to trigger the camera. However, it sends pulses until the next rising edge of its 20% duty cycle trigger signal. This would result in the camera exposing more times than desired.
 
-The solution is to intercept the projector output pulses and only pass one through to the camera. The trigger pulse recreated by the Teensy, seen in pink, must be centered around the pulse it is replicating to avoid skewing of camera exposure timing. The orange trace is the output from the camera indicating that it has indeed been triggered.
+The solution is to intercept the projector output pulses and only pass one through to the camera. The trigger pulse recreated by the Teensy, seen in yellow, must be centered around the pulse it is replicating to avoid skewing of camera exposure timing. 
