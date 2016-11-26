@@ -2,6 +2,9 @@
 
 ProjectorAdapter is a solution for timing camera exposure time with a Digital Micromirror Device (DMD) trigger signal for use in 3D recording.
 
+The completed solution, show below, is connected to the projector with the bottom two cables, with the camera trigger cable out the top.
+<img src="./images/v3final.jpg">
+
 ### Hardware
 The firmware runs on a [Teensy 3.2](https://www.pjrc.com/store/teensy32.html).
 
